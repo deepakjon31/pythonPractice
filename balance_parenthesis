@@ -1,0 +1,11 @@
+def balance_parenthesis(st):
+    mapping = dict(zip('({[', ')}]'))
+    queue = []
+    for letter in st:
+        if letter in mapping:
+            queue.append(mapping[letter])
+        elif not (queue and letter == queue.pop()):
+            return False
+    return not queue
+
+print(balance_parenthesis('({})'))
