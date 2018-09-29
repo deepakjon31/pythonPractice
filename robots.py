@@ -27,32 +27,37 @@ def get_robots(url):
     if res.status_code == 200:
         return BS(res.content, 'lxml')
     else:
-        raise ValueError("Not Found robots.txt !")
+        pprint("Not Found robots.txt !")
+        return "ALL"
+        # raise ValueError("Not Found robots.txt !")
 
 def find_web_crawling_perimission(url):
     """Get allow and disallow permission from robots.txt file"""
-    robotscontent = get_robots(url).find('p').text
-    disallow = re.findall(r'Disallow.*', robotscontent)
-    allow = re.findall(r'Allow.*', robotscontent)
-    return (allow, disallow)
+    robotscontent = get_robots(url)
+    if robotscontent == 'ALL':
+        return 'ALL','None'
+    else:
+        disallow = re.findall(r'Disallow.*', robotscontent.find('p').text)
+        allow = re.findall(r'Allow.*', robotscontent.find('p').text)
+        return (allow, disallow)
 
 def check(url):
     """Get web scrawling is permitted or not"""
-    allow, disallow = find_web_crawling_perimission(url)
-    length = len([i for i in disallow if i.split(':')[1].strip() in ['/', 'admin', '/*', '/?']])
-    if length > 0:
-        return "Not Allowed"
-    else:
-        return "Allowed"
+    try:
+        allow, disallow = find_web_crawling_perimission(url)
+        if allow == 'ALL':
+            return True
+        length = len([i for i in disallow if i.split(':')[1].strip() in ['/', 'admin', '/*', '/?']])
+        if length > 0:
+            return True
+    except TypeError:
+        return False
 
 def find_all_allow(url):
     """Get all the allows permission"""
-    return find_web_crawling_perimission(url)[0]
+    return find_web_crawling_perimission(url)[0] if find_web_crawling_perimission(url) else True
 
 def find_all_disallow(url):
     """Get all the disallow permission"""
-    return find_web_crawling_perimission(url)[1]
-
-
-if __name__ == '__main__':
-    pass
+    if find_web_crawling_perimission(url):
+        return find_web_crawling_perimission(url)[1]
