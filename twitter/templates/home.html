@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h2 align="center">Startup Companies to analyze the tweet:</h2><br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Company Name</th>
+          <th scope="col">Joined</th>
+          <th scope="col">Market</th>
+          <th scope="col">Employee Size</th>
+          <th scope="col">Fund Raised</th>
+          <th scope="col">Location</th>
+        </tr>
+      </thead>
+      {% for i, v in data.iterrows()%}
+        <tbody>
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>
+              <form method="POST">
+                <a name="company" href="{{url_for('compnaytweeter', company=v['Company Name'])}}">{{v['Company Name']}}</a>
+              </form>
+          </td>
+          <td>{{v['Joined']}}</td>
+          <td>{{v['Market']}}</td>
+          <td>{{v['Employee Size']}}</td>
+          <td>{{v['Fund Raised']}}</td>
+          <td>{{v['Location']}}</td>
+        </tr>
+      </tbody>
+        {%endfor%}
+    </table>
+
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h2>Tweets stats: {{item.name}}</h2>
+    <p>{{detail}}</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Parameter</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+          <td><p>Name</p></td>
+          <td>{{item.name}}</td>
+        </tr>
+        <tr>
+          <td><p>Screen Name</p></td>
+          <td>{{item.screen_name}}</td>
+        </tr>
+        <tr>
+          <td><p>Description</p></td>
+          <td>{{item.description}}</td>
+        </tr>
+        <tr>
+          <td><p>Tweet Count</p></td>
+          <td>{{item.statuses_count}}</td>
+        </tr>
+        <tr>
+          <td><p>Friends Count</p></td>
+          <td>{{item.friends_count}}</td>
+        </tr>
+        <tr>
+          <td><p>Followers Count</p></td>
+          <td>{{item.followers_count}}</td>
+        </tr>
+        <tr>
+          <td><p>Account Age(in days)</p></td>
+          <td>{{days}}</td>
+        </tr>
+        <tr>
+          <td><p>Average tweets Per Day</p></td>
+          <td>{{tweet_per_day}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+</div>
+{% endblock %}
