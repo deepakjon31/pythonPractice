@@ -1,0 +1,1 @@
+1. https://dev.to/rodolfoferro/sentiment-analysis-on-trumpss-tweets-using-python-
