@@ -1,9 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime, timedelta
+from bokeh.models import (HoverTool, FactorRange, Plot, LinearAxis, Grid, Range1d)
+from bokeh.models.glyphs import VBar
 from bokeh.plotting import figure
-
 from bokeh.embed import components
-
+from bokeh.models.sources import ColumnDataSource
+from bokeh.resources import INLINE
+from bokeh.util.string import encode_utf8
 
 from companies_csv import df
 from tweeter_api import TweeterAPI
@@ -29,28 +32,25 @@ def compnaytweeter(company):
             tweet_per_day = float(item.statuses_count) / float(delta.days)
         except:
             pass
+        else:
+            return render_template('tweeter.html', user_tweeter=user_tweeter, item=item, days=delta.days,
+                                   tweet_per_day=tweet_per_day)
+        return redirect(url_for('home.html', data=df))
 
-        return render_template('tweeter.html', user_tweeter=user_tweeter, item=item, days=delta.days,
-                               tweet_per_day=tweet_per_day)
+def create_figure():
+    plot = figure(plot_height=200, plot_width=200, toolbar_location=None)
+    x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    y = [2 ** v for v in x]
 
-def create_figure(current_feature_name, bins):
-	p = Histogram(iris_df, current_feature_name, title=current_feature_name, color='Species',
-	 	bins=bins, legend='top_right', width=600, height=400)
+    plot.line(x, y, line_width=4)
+    plot.toolbar.logo = None
 
-	# Set the x axis label
-	p.xaxis.axis_label = current_feature_name
-
-	# Set the y axis label
-	p.yaxis.axis_label = 'Count'
-	return p
+    return plot
 
 
-@app.route('/chart')
+@app.route('/charts')
 def charts():
-    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
-    values = [10, 9, 8, 7, 6, 4, 7, 8]
-    colors = ["#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA", "#ABCDEF", "#DDDDDD", "#ABCABC"]
-    return render_template('charts.html', set=zip(values, labels, colors), data=df)
+    return render_template('charts.html')
 
 @app.errorhandler(404)
 def page_not_found(e):

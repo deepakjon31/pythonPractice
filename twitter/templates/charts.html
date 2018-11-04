@@ -1,11 +1,19 @@
-{% extends "base.html" %}
-<head>
-    <title>Chart</title>
-    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css" rel="stylesheet" type="text/css">
-    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.css" rel="stylesheet" type="text/css">
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
-</head>
-{% block content %}
-
-{% endblock %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Embed Demo</title>
+    
+  </head>
+  <body>
+      <div align="center">
+          <h2>Tweets Length:</h2>
+          <img src="{{url_for('static', filename='images/len.png')}}">
+      </div>
+      <div>
+          <h2 align="center">Time Series:</h2>
+          <img align="middle" src="{{url_for('static', filename='images/timeseries.png')}}">
+      </div>
+  </body>
+</html>
