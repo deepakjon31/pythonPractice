@@ -23,20 +23,48 @@ def index():
 @app.route('/company/<company>', methods=['GET', 'POST'])
 def compnaytweeter(company):
     if company in df['Company Name'].tolist():
-        user_tweeter = df[df['Company Name'] == company]['Tweeter Link'].values.tolist()[0].split('/')[-1].replace('@', '')
-        print(user_tweeter)
+        if not df[df['Company Name'] == company]['Tweeter Link'].isnull().values.tolist()[0]:
+            user_tweeter = df[df['Company Name'] == company]['Tweeter Link'].values.tolist()[0].split('/')[-1].replace('@', '')
+            print(user_tweeter)
+
+        else:
+            error = 'Tweeter ID not found for "%s"' % company
+            print(error)
+            return render_template('custom_error.html', error=error)
+
         try:
             tweeter = TweeterAPI()
             item = tweeter.get_user(user_tweeter)
             delta = datetime.utcnow() - item.created_at
             tweet_per_day = float(item.statuses_count) / float(delta.days)
-        except:
-            pass
+            file = 'tweets_%s.csv' % user_tweeter
+            if not os.path.exists(os.path.join(os.path.dirname(__file__), file)):
+                tweeter.get_user_timeline(user_tweeter)
+
+            tweeter_analyze = TweetsAnalyze(user_tweeter)
+            mean, tmore, tlikes, tlen = tweeter_analyze.analyze_tweets()
+            rmore, rlikes, rlen = tweeter_analyze.analyze_retweets()
+            pos, neu, neg, llen = tweeter_analyze.sentimental_analysis()
+            posp = len(pos) * 100 / llen
+            neup = len(neu) * 100 / llen
+            negp = len(neg) * 100 / llen
+
+        except Exception as e:
+            print(e)
         else:
             return render_template('tweeter.html', user_tweeter=user_tweeter, item=item, days=delta.days,
-                                   tweet_per_day=tweet_per_day)
-        return redirect(url_for('home.html', data=df))
+                                   tweet_per_day=tweet_per_day, mean=mean, tmore=tmore, tlikes=tlikes, tlen=tlen,
+                                   rmore=rmore, rlikes=rlikes, rlen=rlen, posp=posp, negp=negp, neup=neup)
 
+        return redirect(url_for('custom_error'))
+    else:
+        return render_template('404.html')
+    
+    
+@app.route('/error')
+def custom_error():
+    return render_template('custom_error.html', error=False)
+    
 def create_figure():
     plot = figure(plot_height=200, plot_width=200, toolbar_location=None)
     x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
