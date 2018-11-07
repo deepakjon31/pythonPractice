@@ -5,44 +5,47 @@
     <p>{{detail}}</p>
     <table class="table table-striped">
       <thead>
-        <tr>
-          <th scope="col">Parameter</th>
-          <th scope="col">Value</th>
-        </tr>
+        <tr><th scope="col">Parameter</th><th scope="col">Value</th></tr>
       </thead>
         <tbody>
-        <tr>
-          <td><p>Name</p></td>
-          <td>{{item.name}}</td>
-        </tr>
-        <tr>
-          <td><p>Screen Name</p></td>
-          <td>{{item.screen_name}}</td>
-        </tr>
-        <tr>
-          <td><p>Description</p></td>
-          <td>{{item.description}}</td>
-        </tr>
-        <tr>
-          <td><p>Tweet Count</p></td>
-          <td>{{item.statuses_count}}</td>
-        </tr>
-        <tr>
-          <td><p>Friends Count</p></td>
-          <td>{{item.friends_count}}</td>
-        </tr>
-        <tr>
-          <td><p>Followers Count</p></td>
-          <td>{{item.followers_count}}</td>
-        </tr>
-        <tr>
-          <td><p>Account Age(in days)</p></td>
-          <td>{{days}}</td>
-        </tr>
-        <tr>
-          <td><p>Average tweets Per Day</p></td>
-          <td>{{tweet_per_day}}</td>
-        </tr>
+        <tr><td><p>Name</p></td><td>{{item.name}}</td></tr>
+        <tr><td><p>Screen Name</p></td><td><p>{{item.screen_name}}</p></td></tr>
+        <tr><td><p>Description</p></td><td><p>{{item.description}}</p></td></tr>
+        <tr><td><p>Tweet Count</p></td><td>{{item.statuses_count}}</td></tr>
+        <tr><td><p>Friends Count</p></td><td>{{item.friends_count}}</td></tr>
+        <tr><td><p>Followers Count</p></td><td>{{item.followers_count}}</td></tr>
+        <tr><td><p>Account Age(in days)</p></td><td>{{days}}</td></tr>
+        <tr><td><p>Average tweets Per Day</p></td><td>{{tweet_per_day}}</td></tr>
+        <tr><td><p>Length's average in tweets</p></td><td>{{mean}}</td></tr>
+        <tr><td><p>The tweet with more likes is</p></td><td><p>{{tmore}}</p></td></tr>
+        <tr><td><p>Number of likes</p></td><td>{{tlikes}}</td></tr>
+        <tr><td><p>characters in tweets</p></td><td>{{tlen}}</td></tr>
+        <tr><td><p>The tweet with more retweets</p></td><td><p>{{rmore}}</p></td></tr>
+        <tr><td><p>Number of retweets</p></td><td>{{rlikes}}</td></tr>
+        <tr><td><p>characters in retweets</p></td><td>{{rlen}}</td></tr>
+      </tbody>
+
+    </table>
+  <!--<div align="center">-->
+    <!--<h2>Tweets Length on Time Series</h2>-->
+    <!--<img src="">-->
+  <!--</div>-->
+  <div align="center">
+    <h2>Likes and Retweet on Time Series</h2>
+    <img src="{{ url_for('static', filename='images/time_series.png')}}" style="width:1000px;">
+  </div>
+   <div align="center">
+    <h2>Percentage of tweets per source</h2>
+    <img src="{{ url_for('static', filename='images/pie_chart.png')}}" style="width:1000px;height:600px;">
+  </div>
+  <table class="table table-striped">
+      <thead>
+        <tr><th scope="col">Tweets Type</th><th scope="col">Percentage</th></tr>
+      </thead>
+        <tbody>
+        <tr><td><p>Percentage of positive tweets</p></td><td>{{posp|safe}}</td></tr>
+        <tr><td><p>Percentage of neutral tweets</p></td><td><p>{{neup|safe}}</p></td></tr>
+        <tr><td><p>Percentage de negative tweets</p></td><td><p>{{negp|safe}}</p></td></tr>
       </tbody>
 
     </table>
