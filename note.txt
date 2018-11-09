@@ -1,1 +1,5 @@
 1. https://dev.to/rodolfoferro/sentiment-analysis-on-trumpss-tweets-using-python-
+
+
+# sqlite3 basic tutorial
+1. https://www.sitepoint.com/getting-started-sqlite3-basic-commands/
