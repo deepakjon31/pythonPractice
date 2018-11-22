@@ -1,0 +1,5 @@
+consumer_key = "wbLDYhb6GJarUENGUeKMrLOh6"
+consumer_secret = "ZsvDAS5wBmd5vrOstTmbMNbyUpGqBCGuLtTey4e40drglt5MXG"
+access_token = "2285164868-skxHttDe7Qai7NTnnoi4mkfDtDSVlOtDlfqtJba"
+access_token_secret = "lGDMrfVDJWsfQ7NfcbBum6HiUBSyMyiyRyXrhqbDKrsE0"
+columns = ['user_id', 'user_created_at', 'user_verified', 'user_name', 'user_screen_name', 'user_lang', 'user_location', 'user_url', 'user_likes_count', 'user_tweets_count', 'user_followers_count', 'user_friends_count', 'user_descriptions', 'user_following', 'user_listed_count', 'user_default_profile_image', 'user_default_profile', 'user_profile_bg_color', 'user_profile_image_url', 'user_time_zone', 'user_utc_offset', 'status_id', 'status_created_at', 'status_lang', 'status_text', 'status_favorite_count', 'status_retweeted', 'status_source', 'status_favorited', 'status_retweet_count', 'status_place', 'status_coordinates', 'status_geo_enabled', 'status_geo', 'hashtags', 'mentions']

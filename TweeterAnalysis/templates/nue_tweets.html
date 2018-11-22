@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+
+    <table class="table table-striped">
+        <thead>
+        <tr align="center"><th></th><th>Neutral Tweets</th></tr>
+        </thead>
+        <tbody>
+        {% for i, v in neu_tweets %}
+        <tr><td>{{i+1}}</td><td>{{v}}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

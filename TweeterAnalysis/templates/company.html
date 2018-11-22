@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+<div>
+    <div style="float: left; width: 225px">
+        <form action="/company">
+            <p>About Company</p>
+            <select name="company_detail">
+                {% for feature in feature_names %}
+                    {% if feature == current_feature_name %}
+                        <option selected value="{{ feature }}">{{ feature }}</option>
+                    {% else %}
+                        <option value="{{ feature }}">{{ feature }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit">
+        </form>
+    </div>
+    <div style="float: right; width: 225px">
+        <form action="/analysis">
+            <p>Sentimental Analysis</p>
+            <select name="company_detail">
+                {% for feature in analysis_feature %}
+                    {% if feature == 'Twitter' %}
+                        <option selected value="{{ feature }}">{{ feature }}</option>
+                    {% else %}
+                        <option value="{{ feature }}">{{ feature }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        <input type="submit">
+        </form>
+    </div>
+
+</div>
+
+    <table class="table table-striped">
+
+      <h3 align="center">{{current_feature_name}}</h3>
+      <thead>
+      {% for h in header %}
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{h[0]}}</th>
+          <th scope="col">{{h[1]}}</th>
+          <th scope="col">{{h[2]}}</th>
+          <th scope="col">{{h[3]|safe}}</th>
+          <th scope="col">{{h[4]|safe}}</th>
+          <th scope="col">{{h[5]|safe}}</th>
+        </tr>
+      {% endfor %}
+      </thead>
+        <tbody>
+        {% for i,v in feature_query %}
+          <tr>
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{v[0]|safe}}</td>
+            <td>{{v[1]|safe}}</td>
+            <td>{{v[2]|safe}}</td>
+            <td>{{v[3]|safe}}</td>
+            <td>{{v[4]|safe}}</td>
+            <td>{{v[5]|safe}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+</div>
+{% endblock %}

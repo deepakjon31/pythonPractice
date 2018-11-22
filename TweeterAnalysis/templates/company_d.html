@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+{{ js_resources|indent(4)|safe }}
+{{ css_resources|indent(4)|safe }}
+<div class="jumbotron" style="padding: 10px 0px 0px 0px; background-color: chocolate;">
+    <div>
+        <div id="loading" style="text-align: center"></div>
+        <div style="float: left; width: 225px">
+            <form action="/company">
+                <p>About Company</p>
+                <select name="company_detail">
+                    {% for feature in feature_names %}
+                    {% if feature == current_feature_name %}
+                    <option selected value="{{ feature }}">{{ feature }}</option>
+                    {% else %}
+                    <option value="{{ feature }}">{{ feature }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <input type="submit" onsubmit="loading();">
+            </form>
+        </div>
+        <div style="float: right; width: 225px">
+            <form action="/analysis">
+                <p>Sentimental Analysis</p>
+                <select name="company_detail">
+                    {% for feature in analysis_feature %}
+                    {% if feature == 'Twitter' %}
+                    <option selected value="{{ feature }}">{{ feature }}</option>
+                    {% else %}
+                    <option value="{{ feature }}">{{ feature }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <input type="submit" onsubmit="loading();">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+
+                <tbody>
+                    <tr><td>{{ plot_script_f|indent(4)|safe }}{{ plot_div_f|indent(4)|safe }}</td><td>{{ plot_script_f|indent(4)|safe }}{{ plot_div_f|indent(4)|safe }}</td></tr>
+                    <tr><td>{{ plot_script_f|indent(4)|safe }}{{ plot_div_f|indent(4)|safe }}</td><td>{{ plot_script_f|indent(4)|safe }}{{ plot_div_f|indent(4)|safe }}</td></tr>
+
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-sm-3 border">
+            <h6 align="center"><p>About Company</p></h6>
+            <p>{{about}}</p>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

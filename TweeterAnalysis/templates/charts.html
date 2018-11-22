@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ js_resources|indent(4)|safe }}
+{{ css_resources|indent(4)|safe }}
+<div class="jumbotron">
+    <h5 align="center"><p>Tweeter Sentimental Analysis</p></h5>
+    <table class="table table-striped">
+      <thead>
+        <tr><th scope="col">Tweets Type</th><th scope="col">Percentage</th></tr>
+      </thead>
+        <tbody>
+        <tr><td><p><a href="{{url_for('pos_tweets')}}" onclick="loading();">Percentage of positive tweets</a></p></td><td>{{pos_tweet|safe}}</td></tr>
+        <tr><td><p><a href="{{url_for('neu_tweets')}}" onclick="loading();">Percentage of neutral tweets</a></p></td><td><p>{{neu_tweet|safe}}</p></td></tr>
+        <tr><td><p><a href="{{url_for('neg_tweets')}}" onclick="loading();">Percentage de negative tweets</a></p></td><td><p>{{neg_tweet|safe}}</p></td></tr>
+      </tbody>
+
+    </table><br> <div align="center"><p><a href="{{url_for('get_user_detail')}}">Get user detail</a></p></div>
+    <div id="loading" style="text-align: center"></div>
+    <table class="table">
+        <thead>
+        <tr align="right"><th><h4>Words Frequently Used</h4></th><th></th></tr>
+        </thead>
+        <tbody>
+            <tr><td><img src="{{url_for('static', filename='images/words_count.png')}}"></td><td>{{ plot_script|indent(4)|safe }}{{ plot_div|indent(4)|safe }}</td></tr>
+        </tbody>
+
+    </table>
+    <table class="table">
+        <thead>
+        <tr align="right"><th><h4>Most Tags</h4></th><th></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><img src="{{url_for('static', filename='images/most_tags.png')}}"></td><td>{{ plot_script_2|indent(4)|safe }}{{ plot_div_2|indent(4)|safe }}</td></tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+        <tr align="right"><th><h4>Most Mentions</h4></th><th></th></tr>
+        </thead>
+        <tbody>
+        <tr><td><img src="{{url_for('static', filename='images/most_mentions.png')}}"></td><td>{{ plot_script_1|indent(4)|safe }}{{ plot_div_1|indent(4)|safe }}</td></tr>
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

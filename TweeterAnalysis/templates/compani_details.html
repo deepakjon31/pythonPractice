@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--<style>-->
+<!--table {-->
+<!--display:block;-->
+<!--height: 200px !important;-->
+ <!--width:100%;-->
+<!--overflow-y : scroll;-->
+<!--}-->
+<!--</style>-->
+<div class="jumbotron">
+
+    <table class="table table-striped">
+
+      <h3 align="center">Funds</h3>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Raised Fund</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      {% for i, v in fund.iterrows()%}
+        <tbody>
+          <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{v['Fund']}}</td>
+            <td>{{v['Date']}}</td>
+          </tr>
+      </tbody>
+        {%endfor%}
+    </table><br>
+
+      <h4 align="center">Investors Detail</h4>
+
+      <table class="table table-striped table-sm">
+
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Investor Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Investor URL</th>
+            <th scope="col">Investor BIO</th>
+          </tr>
+        </thead>
+        {% for i, v in investor.iterrows()%}
+          <tbody>
+            <tr>
+              <th scope="row">{{i+1}}</th>
+              <td>{{v['Investors_name']}}</td>
+              <td>{{v['Investors_title']}}</td>
+              <td>{{v['Investors_url']}}</td>
+              <td>{{v['Investors_bio']}}</td>
+            </tr>
+        </tbody>
+          {%endfor%}
+
+      </table>
+
+    <h4 align="center">Employees Detail</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Designation</th>
+          <th scope="col">Employee URL</th>
+          <th scope="col">Employee BIO</th>
+        </tr>
+      </thead>
+      {% for i, v in employee.iterrows()%}
+        <tbody>
+          <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{v['emp_name']}}</td>
+            <td>{{v['emp_title']}}</td>
+            <td>{{v['emp_url']}}</td>
+            <td>{{v['emp_bio']}}</td>
+          </tr>
+      </tbody>
+        {% endfor %}
+    </table><br>
+  <h4 align="center">Jobs Detail</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Job Description</th>
+          <th scope="col">Location</th>
+          <th scope="col">Job Type</th>
+          <th scope="col">Job Salary</th>
+        </tr>
+      </thead>
+      {% for i, v in jobs.iterrows()%}
+        <tbody>
+          <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{v['job_designation']}}</td>
+            <td>{{v['job_location']}}</td>
+            <td>{{v['job_type']}}</td>
+            <td>{{v['job_salary']}}</td>
+          </tr>
+      </tbody>
+        {% endfor %}
+    </table><br>
+<h4 align="center">Five Tweets detail </h4>
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Posted at</th>
+          <th scope="col">Tweets Text</th>
+        </tr>
+      </thead>
+      {% for i, v in status_tweets.iterrows()%}
+        <tbody>
+          <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{v['status_created_at']}}</td>
+            <td>{{v['status_text']}}</td>
+          </tr>
+      </tbody>
+        {% endfor %}
+    </table>
+    <form method="POST">
+     <p align="center">Please click <a name="analysis" href="{{url_for('sentanalysis', company='hush')}}" >here</a> for tweeter sentimental analysis</p>
+    </form>
+</div>
+{% endblock %}

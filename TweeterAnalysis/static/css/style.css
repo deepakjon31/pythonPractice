@@ -1,0 +1,11 @@
+div#loading {
+    width: 100px;
+    height: 100px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
+    background: url(/static/images/loadingimage.gif) no-repeat;
+    cursor: wait;
+    }
