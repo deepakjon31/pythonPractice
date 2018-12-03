@@ -1,0 +1,60 @@
+Ref: https://packaging.python.org/tutorials/packaging-projects/
+
+Create folder sttructure like below
+/example_pkg
+  /example_pkg
+    __init__.py
+
+Edit the __init__.py file and add below content
+name = "/example_pkg"
+
+
+/example_pkg
+  /example_pkg
+    __init__.py
+    robotsparser.py
+  setup.py
+  LICENSE
+  README.md
+
+Edit setup.py
+import setuptools
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="example_pkg",
+    version="0.0.1",
+    author="Example Author",
+    author_email="author@example.com",
+    description="A small example package",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/pypa/sampleproject",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)
+
+
+python -m pip install --user --upgrade setuptools wheel
+
+
+same directory where setup.py is located
+python3 setup.py sdist bdist_wheel
+
+
+Upload the file in python package index
+python3 -m pip install --user --upgrade twine
+
+
+
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+
+install 
+python -m pip install --index-url https://test.pypi.org/simple/ example_pkg
