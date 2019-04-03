@@ -15,3 +15,7 @@
 Error: Jenkins Host key verification failed
 Solution: git ls-remote -h git@bitbucket.org:person/projectmarket.git HEAD [type, 'yes']
 ref: https://stackoverflow.com/questions/15174194/jenkins-host-key-verification-failed
+
+
+###Tensorfloaw ###
+1. https://www.superdatascience.com/pages/deep-learning-chatbot
